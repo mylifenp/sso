@@ -74,9 +74,9 @@ networks:
 
 secrets:
   keycloak_secrets:
-    file: ./keycloak_secrets.txt
+    file: keycloak_secrets.txt
   db_secrets:
-    file: ./db_secrets.txt
+    file: db_secrets.txt
 
 volumes:
   postgres_data:

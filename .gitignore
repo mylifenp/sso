@@ -2,3 +2,4 @@ keycloak_secrets.txt
 db_secrets.txt
 
 .env
+keycloak.conf

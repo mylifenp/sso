@@ -15,8 +15,8 @@ services:
       - KEYCLOAK_ADMIN=/run/secrets/KEYCLOAK_ADMIN
       - KEYCLOAK_ADMIN_PASSWORD=run/secrets/KEYCLOAK_ADMIN_PASSWORD
       - PROXY_ADDRESS_FORWARDING=true
-      - VIRTUAL_HOST=run/secrets/HOST
-      - VIRTUAL_PORT=9011
+      # - VIRTUAL_HOST=run/secrets/HOST
+      - VIRTUAL_PORT=run/secrets/PORT
     networks:
       - internal
 

@@ -10,7 +10,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./keycloak.conf:/opt/keycloak/conf/keycloak.conf
     command:
-      - start-dev
+      - start --hostname=auth.cingularity.de
+      # - start-dev
     ports:
       - "9011:8080"
     environment:

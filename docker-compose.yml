@@ -16,8 +16,7 @@ services:
       - KEYCLOAK_ADMIN_PASSWORD=run/secrets/KEYCLOAK_ADMIN_PASSWORD
       - PROXY_ADDRESS_FORWARDING=true
       - VIRTUAL_HOST=run/secrets/HOST
-      - VIRTUAL_PORT=8080
-      - LETSENCRYPT_HOST=run/secrets/HOST
+      - VIRTUAL_PORT=9011
     networks:
       - internal
 
@@ -34,35 +33,34 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - internal
+  # proxy:
+  #   image: nginxproxy/nginx-proxy
+  #   container_name: "nginx"
+  #   ports:
+  #     - "443:443"
+  #     - "80:80"
+  #   volumes:
+  #     - conf:/etc/nginx/conf.d
+  #     - vhost:/etc/nginx/vhost.d
+  #     - html:/usr/share/nginx/html
+  #     - certs:/etc/nginx/certs
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
+  #   networks:
+  #     - internal
 
-  proxy:
-    image: nginxproxy/nginx-proxy
-    container_name: "nginx"
-    ports:
-      - "443:443"
-      - "80:80"
-    volumes:
-      - conf:/etc/nginx/conf.d
-      - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - certs:/etc/nginx/certs
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    networks:
-      - internal
-
-  acme-companion:
-    image: nginxproxy/acme-companion
-    container_name: "acme-proxy"
-    environment:
-      - DEFAULT_EMAIL=amit@datenium.com
-    volumes_from:
-      - proxy
-    volumes:
-      - certs:/etc/nginx/certs
-      - acme:/etc/acme.sh
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    networks:
-      - internal
+  # acme-companion:
+  #   image: nginxproxy/acme-companion
+  #   container_name: "acme-proxy"
+  #   environment:
+  #     - DEFAULT_EMAIL=amit@datenium.com
+  #   volumes_from:
+  #     - proxy
+  #   volumes:
+  #     - certs:/etc/nginx/certs
+  #     - acme:/etc/acme.sh
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #   networks:
+  #     - internal
 
 networks:
   internal:
@@ -80,8 +78,8 @@ secrets:
 
 volumes:
   postgres_data:
-  conf:
-  vhost:
+  conf: # vhost:
+
   html:
-  certs:
-  acme:
+    # certs:
+    # acme:

@@ -1,2 +1,4 @@
 keycloak_secrets.txt
 db_secrets.txt
+
+.env

@@ -48,7 +48,7 @@ services:
       - 5433:5432
     volumes:
       - ./.docker/postgres/db-data/:/var/lib/postgresql/data/:rw
-      - ./.docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      # - ./.docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       - local-keycloak
 

@@ -7,6 +7,8 @@ services:
     container_name: "keycloak"
     depends_on:
       - postgres
+    env_file:
+      - ".env"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./keycloak.conf:/opt/keycloak/conf/keycloak.conf
@@ -46,6 +48,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
     ports:
       - 5433:5432
+    env_file:
+      - ".env"
     volumes:
       - ./.docker/postgres/db-data/:/var/lib/postgresql/data/:rw
       # - ./.docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro

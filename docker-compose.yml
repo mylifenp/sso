@@ -1,14 +1,15 @@
 version: "3"
 
 services:
-  sso:
+  keycloak:
     image: quay.io/phasetwo/phasetwo-keycloak:latest
     restart: always
-    container_name: "keycloak"
+    container_name: keycloak
+    ports:
+      - ${KEYCLOAK_PORT}:8080
+      - ${KEYCLOAK_PORT_SSL}:8443
     depends_on:
       - postgres
-    env_file:
-      - ".env"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./keycloak.conf:/opt/keycloak/conf/keycloak.conf
@@ -38,6 +39,7 @@ services:
       ]
     networks:
       - local-keycloak
+
   postgres:
     image: postgres:15
     restart: always
@@ -47,12 +49,10 @@ services:
       POSTGRES_USER: ${POSTGRESQL_USER}
       POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
     ports:
-      - 5434:5432
-    env_file:
-      - ".env"
+      - 5433:5432
     volumes:
       - ./.docker/postgres/db-data/:/var/lib/postgresql/data/:rw
-      # - ./.docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./.docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       - local-keycloak
 

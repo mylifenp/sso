@@ -32,13 +32,13 @@ services:
       KC_DB_SCHEMA: public
       KC_DB_USERNAME: ${POSTGRESQL_USER}
       KC_DB_PASSWORD: ${POSTGRESQL_PASSWORD}
-      KC_HOSTNAME: ${KEYCLOAK_HOSTNAME}
+      KC_HOSTNAME: 'https://auth.nepdom.com/'
       PROXY_ADDRESS_FORWARDING: 'true'
       KC_HOSTNAME_STRICT: 'true'
       KC_HTTP_ENABLED: 'true'
       KC_PROXY: 'edge'
       KC_LOG_LEVEL: INFO
-    entrypoint: ["/opt/keycloak/bin/kc.sh", "start", "--spi-email-template-provider=freemarker-plus-mustache", "--spi-email-template-freemarker-plus-mustache-enabled=true", "--spi-theme-cache-themes=false", "--optimized"]
+    entrypoint: ["/opt/keycloak/bin/kc.sh", "start", "--spi-email-template-provider=freemarker-plus-mustache", "--spi-email-template-freemarker-plus-mustache-enabled=true", "--spi-theme-cache-themes=false"]
     ports:
       - ${KEYCLOAK_PORT}:8080
       - ${KEYCLOAK_PORT_SSL}:8843

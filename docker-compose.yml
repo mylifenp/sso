@@ -35,9 +35,9 @@ services:
         "--spi-email-template-provider=freemarker-plus-mustache",
         "--spi-email-template-freemarker-plus-mustache-enabled=true",
         "--spi-theme-cache-themes=false",
-        "--features=declarative-ui",
-        "--health-enabled=true",
-        "--metrics-enabled=true",
+#        "--features=declarative-ui",
+#        "--health-enabled=true",
+#        "--metrics-enabled=true",
 #        "--optimized",
       ]
     networks:

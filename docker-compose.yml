@@ -33,14 +33,14 @@ services:
       KC_LOG_LEVEL: INFO
     entrypoint: [
         "/opt/keycloak/bin/kc.sh",
-        "build",
+        "start",
 #        "--spi-email-template-provider=freemarker-plus-mustache",
 #        "--spi-email-template-freemarker-plus-mustache-enabled=true",
 #        "--spi-theme-cache-themes=false",
 #        "--features=declarative-ui",
 #        "--health-enabled=true",
 #        "--metrics-enabled=true",
-#        "--optimized",
+        "--optimized",
       ]
     networks:
       - local-keycloak

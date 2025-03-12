@@ -4,3 +4,5 @@ db_secrets.txt
 .env
 keycloak.conf
 .docker
+
+.idea/*

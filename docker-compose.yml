@@ -34,7 +34,14 @@ services:
       KC_HTTP_ENABLED: 'true'
       KC_PROXY: 'edge'
       KC_LOG_LEVEL: INFO
-    entrypoint: ["/opt/keycloak/bin/kc.sh", "start", "--spi-email-template-provider=freemarker-plus-mustache", "--spi-email-template-freemarker-plus-mustache-enabled=true", "--spi-theme-cache-themes=false"]
+    entrypoint: [
+      "/opt/keycloak/bin/kc.sh",
+      "start",
+      "--spi-email-template-provider=freemarker-plus-mustache",
+      "--spi-email-template-freemarker-plus-mustache-enabled=true",
+      "--spi-theme-cache-themes=false",
+      "--optimized"
+    ]
     ports:
       - 9011:8080
       - 9443:8443

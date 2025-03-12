@@ -31,8 +31,7 @@ services:
       KC_LOG_LEVEL: INFO
     entrypoint: [
         "/opt/keycloak/bin/kc.sh",
-        "build",
-#        "start",
+        "start",
 #        "--hostname=localhost",
 #        "--spi-email-template-provider=freemarker-plus-mustache",
 #        "--spi-email-template-freemarker-plus-mustache-enabled=true",

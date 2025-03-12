@@ -33,6 +33,7 @@ services:
       KC_DB_SCHEMA: public
       KC_DB_USERNAME: ${POSTGRESQL_USER}
       KC_DB_PASSWORD: ${POSTGRESQL_PASSWORD}
+      KC_HOSTNAME: 'https://auth.nepdom.com/'
       KC_HOSTNAME_STRICT: 'false'
       KC_HTTP_ENABLED: 'true'
       KC_PROXY: 'edge'

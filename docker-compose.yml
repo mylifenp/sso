@@ -17,28 +17,30 @@ services:
       PROXY_ADDRESS_FORWARDING: "true"
       KEYCLOAK_USER: ${KEYCLOAK_USER}
       KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
-      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_DB: postgres
       KC_DB_URL_HOST: postgres
       KC_DB_URL_DATABASE: keycloak
       KC_DB_SCHEMA: public
       KC_DB_USERNAME: ${POSTGRESQL_USER}
       KC_DB_PASSWORD: ${POSTGRESQL_PASSWORD}
-      KC_HOSTNAME_STRICT: "false"
+      KC_HOSTNAME: ${KEYCLOAK_HOSTNAME}
+      KC_HOSTNAME_STRICT: "true"
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: true
       KC_HTTP_ENABLED: "true"
-      KC_PROXY: "edge"
+      KC_PROXY_HEADERS: "xforwarded"
       KC_LOG_LEVEL: INFO
     entrypoint: [
         "/opt/keycloak/bin/kc.sh",
-        "start",
+        "build",
 #        "--spi-email-template-provider=freemarker-plus-mustache",
 #        "--spi-email-template-freemarker-plus-mustache-enabled=true",
 #        "--spi-theme-cache-themes=false",
 #        "--features=declarative-ui",
 #        "--health-enabled=true",
 #        "--metrics-enabled=true",
-        "--optimized",
+#        "--optimized",
       ]
     networks:
       - local-keycloak

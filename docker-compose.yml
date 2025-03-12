@@ -22,18 +22,18 @@ services:
     restart: always
     container_name: keycloak
     environment:
-      PROXY_ADDRESS_FORWARDING: 'true'
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: password
-      KC_BOOTSTRAP_ADMIN_USERNAME: admin
-      KC_BOOTSTRAP_ADMIN_PASSWORD: password
+      KEYCLOAK_USER: ${KEYCLOAK_USER}
+      KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN_USER}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_DB: postgres
       KC_DB_URL_HOST: postgres
       KC_DB_URL_DATABASE: ${POSTGRESQL_DB}
       KC_DB_SCHEMA: public
       KC_DB_USERNAME: ${POSTGRESQL_USER}
       KC_DB_PASSWORD: ${POSTGRESQL_PASSWORD}
-      KC_HOSTNAME: 'https://auth.nepdom.com/'
+      KC_HOSTNAME: ${KEYCLOAK_HOSTNAME}
+      PROXY_ADDRESS_FORWARDING: 'true'
       KC_HOSTNAME_STRICT: 'true'
       KC_HTTP_ENABLED: 'true'
       KC_PROXY: 'edge'

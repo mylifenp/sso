@@ -32,7 +32,6 @@ services:
     entrypoint: [
         "/opt/keycloak/bin/kc.sh",
         "start",
-        "--hostname=auth.nepdom.com",
         "--spi-email-template-provider=freemarker-plus-mustache",
         "--spi-email-template-freemarker-plus-mustache-enabled=true",
         "--spi-theme-cache-themes=false",

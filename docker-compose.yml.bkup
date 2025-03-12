@@ -1,50 +1,4 @@
-version: "3"
-
 services:
-  keycloak:
-    image: quay.io/phasetwo/phasetwo-keycloak:26.1.2
-    restart: always
-    container_name: keycloak
-    ports:
-      - ${KEYCLOAK_PORT}:8080
-      - ${KEYCLOAK_PORT_SSL}:8843
-    depends_on:
-      - postgres
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./keycloak.conf:/opt/keycloak/conf/keycloak.conf
-    environment:
-      PROXY_ADDRESS_FORWARDING: "true"
-      KEYCLOAK_USER: ${KEYCLOAK_USER}
-      KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
-      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN}
-      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
-      KC_DB: postgres
-      KC_DB_URL_HOST: postgres
-      KC_DB_URL_DATABASE: keycloak
-      KC_DB_SCHEMA: public
-      KC_DB_USERNAME: ${POSTGRESQL_USER}
-      KC_DB_PASSWORD: ${POSTGRESQL_PASSWORD}
-      KC_HOSTNAME: ${KEYCLOAK_HOSTNAME}
-      KC_HOSTNAME_STRICT: "true"
-      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: false
-      KC_HTTP_ENABLED: "true"
-      KC_PROXY_HEADERS: "xforwarded"
-      KC_LOG_LEVEL: INFO
-    entrypoint: [
-        "/opt/keycloak/bin/kc.sh",
-        "start",
-        "--spi-email-template-provider=freemarker-plus-mustache",
-        "--spi-email-template-freemarker-plus-mustache-enabled=true",
-        "--spi-theme-cache-themes=false",
-#        "--features=declarative-ui",
-#        "--health-enabled=true",
-#        "--metrics-enabled=true",
-#        "--optimized",
-      ]
-    networks:
-      - local-keycloak
-
   postgres:
     image: postgres:15
     restart: always
@@ -60,6 +14,49 @@ services:
       - ./.docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       - local-keycloak
+  keycloak:
+    image: quay.io/phasetwo/phasetwo-keycloak:latest
+    restart: always
+    container_name: keycloak
+    ports:
+      - ${KEYCLOAK_PORT}:8080
+      - ${KEYCLOAK_PORT_SSL}:8843
+    depends_on:
+      - postgres
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./keycloak.conf:/opt/keycloak/conf/keycloak.conf
+    environment:
+      PROXY_ADDRESS_FORWARDING: "true"
+      KEYCLOAK_USER: ${KEYCLOAK_USER}
+      KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN_USER}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_SCHEMA: public
+      KC_DB_USERNAME: ${POSTGRESQL_USER}
+      KC_DB_PASSWORD: ${POSTGRESQL_PASSWORD}
+      KC_HOSTNAME: ${KEYCLOAK_HOSTNAME}
+      KC_HOSTNAME_STRICT: "true"
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: false
+      KC_HTTP_ENABLED: "true"
+      KC_LOG_LEVEL: INFO
+    entrypoint: [
+        "/opt/keycloak/bin/kc.sh",
+        "start",
+        "--spi-email-template-provider=freemarker-plus-mustache",
+        "--spi-email-template-freemarker-plus-mustache-enabled=true",
+        "--spi-theme-cache-themes=false",
+#        "--features=declarative-ui",
+#        "--health-enabled=true",
+#        "--metrics-enabled=true",
+        "--optimized",
+      ]
+    networks:
+      - local-keycloak
+
 
 networks:
   local-keycloak:

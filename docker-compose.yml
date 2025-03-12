@@ -2,7 +2,7 @@ version: "3"
 
 services:
   keycloak:
-    image: quay.io/phasetwo/phasetwo-keycloak:latest
+    image: quay.io/phasetwo/phasetwo-keycloak:26.1.2
     restart: always
     container_name: keycloak
     ports:

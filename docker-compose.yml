@@ -32,12 +32,12 @@ services:
     entrypoint: [
         "/opt/keycloak/bin/kc.sh",
         "start",
-#        "--optimized",
-        "--hostname=${KEYCLOAK_HOSTNAME}",
+        "--hostname=localhost",
         "--spi-email-template-provider=freemarker-plus-mustache",
         "--spi-email-template-freemarker-plus-mustache-enabled=true",
         "--spi-theme-cache-themes=false",
-        "--features=declarative-ui",
+        "--optimized",
+#        "--features=declarative-ui",
       ]
     networks:
       - local-keycloak

@@ -6,8 +6,8 @@ services:
     restart: always
     container_name: keycloak
     ports:
-      - ${KEYCLOAK_PORT}:${KEYCLOAK_PORT}
-      - ${KEYCLOAK_PORT_SSL}:${KEYCLOAK_PORT_SSL}
+      - ${KEYCLOAK_PORT}:8080
+      - ${KEYCLOAK_PORT_SSL}:8843
     depends_on:
       - postgres
     volumes:
@@ -32,7 +32,8 @@ services:
     entrypoint: [
         "/opt/keycloak/bin/kc.sh",
         "start",
-        # "--optimized",
+        "--optimized",
+        "--hostname=${KEYCLOAK_HOSTNAME}",
         "--spi-email-template-provider=freemarker-plus-mustache",
         "--spi-email-template-freemarker-plus-mustache-enabled=true",
         "--spi-theme-cache-themes=false",

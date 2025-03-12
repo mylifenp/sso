@@ -32,7 +32,7 @@ services:
     entrypoint: [
         "/opt/keycloak/bin/kc.sh",
         "start",
-        "--optimized",
+#        "--optimized",
         "--hostname=${KEYCLOAK_HOSTNAME}",
         "--spi-email-template-provider=freemarker-plus-mustache",
         "--spi-email-template-freemarker-plus-mustache-enabled=true",

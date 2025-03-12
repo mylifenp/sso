@@ -33,7 +33,7 @@ services:
       KC_LOG_LEVEL: INFO
     entrypoint: [
         "/opt/keycloak/bin/kc.sh",
-        "start",
+        "start-dev",
 #        "--spi-email-template-provider=freemarker-plus-mustache",
 #        "--spi-email-template-freemarker-plus-mustache-enabled=true",
 #        "--spi-theme-cache-themes=false",

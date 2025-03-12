@@ -52,7 +52,7 @@ services:
 #        "--features=declarative-ui",
 #        "--health-enabled=true",
 #        "--metrics-enabled=true",
-        "--optimized",
+#        "--optimized",
       ]
     networks:
       - local-keycloak
